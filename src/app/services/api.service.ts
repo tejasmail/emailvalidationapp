@@ -25,8 +25,8 @@ export class ApiService {
       dob = new Date(dob);
     }
     const today = new Date();
-    const age = today.getFullYear() - dob.getFullYear();
-    const isOver18 = age <  18;
+    const age = dob.getFullYear() - today.getFullYear();
+    const isOver18 = age >  18;
     return of(isOver18).pipe(delay(500));
   }
 }
