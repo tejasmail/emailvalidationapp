@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input
+          type="date"
+          id="dob"
+          class="form-control"
+          [(ngModel)]="dob"
+          required
+        />
+        <div class="invalid-feedback">
+          Please provide a valid date of birth.
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary mt-2"
+        (click)="!loading && validateDob()"
+      >
+        <div *ngIf="!loading"  class="">Validate</div>
+        <div
+          *ngIf="loading"
+          class="spinner-border text-primary mt-3"
+          role="status"
+        >
+          <span class="sr-only"></span>
+        </div>
+      </button>
+
+      
+      <div *ngIf="dobValidationResult !== undefined" class="mt-3">
+        <div
+          [ngClass]="{
+            alert: true,
+            'alert-success': dobValidationResult,
+            'alert-danger': !dobValidationResult
+          }"
+          role="alert"
+        >
+          {{
+            dobValidationResult
+              ? "Date of Birth is valid."
+              : "Date of Birth is not valid."
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

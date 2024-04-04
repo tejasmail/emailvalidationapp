@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <h2>Email Form</h2>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Enter your email" [(ngModel)]="email">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" (click)="sendEmail()" [disabled]="loading">
+              <span *ngIf="!loading">Send Email</span>
+              <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span class="sr-only"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
