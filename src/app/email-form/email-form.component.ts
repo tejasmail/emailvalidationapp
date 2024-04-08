@@ -22,7 +22,7 @@ export class EmailFormComponent {
    */
   sendEmail() {
     this.loading = true;
-    this.apiService.sendEmail().subscribe((uniqueId) => {
+    this.apiService.sendEmail(this.email).subscribe((uniqueId) => {
       this.loading = false;
       this.router.navigate(['/validate-dob', uniqueId]);
     });

@@ -1,18 +1,21 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
-
+import { Observable } from 'rxjs';
+const BASE_URL = 'http://localhost:3000/';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'any',
 })
 export class ApiService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   /**
    * This service makes api call to send mail and returns unique id
    * @returns observable of unique id
    */
-  sendEmail(): Observable<string> {
-    return of(Math.random().toString(36).substr(2, 9)).pipe(delay(1000));
+  sendEmail(email: string): Observable<string> {
+    return this.http.post<string>(BASE_URL + 'send-email', { email }, {
+      responseType:'json'
+    });
   }
 
   /**
@@ -20,13 +23,11 @@ export class ApiService {
    * @param dob date of birth
    * @returns observable of boolean
    */
-  validateDob(dob: any): Observable<boolean> {
+  validateDob(dob: Date): Observable<boolean> {
     if (!(dob instanceof Date)) {
       dob = new Date(dob);
     }
-    const today = new Date();
-    const age = dob.getFullYear() - today.getFullYear();
-    const isOver18 = age >  18;
-    return of(isOver18).pipe(delay(500));
+    return this.http.post<boolean>(BASE_URL + 'validate-dob', { dob });
+    ;
   }
 }
